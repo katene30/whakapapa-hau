@@ -5,6 +5,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=50)
     birth_date = models.DateField()
     death_date = models.DateField(null=True, blank=True)
+    is_me = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -23,3 +24,6 @@ class Relationship(models.Model):
     from_person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='from_person')
     to_person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='to_person')
     relationship_type = models.CharField(max_length=20, choices=RELATIONSHIP_CHOICES)
+
+    def __str__(self):
+        return f"{self.from_person} {self.relationship_type} {self.to_person}"

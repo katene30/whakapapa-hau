@@ -2,7 +2,7 @@
     <h1>Family Tree Builder</h1>
     <ul>
         {% for person in people %}
-            <li>{{ person.name }}</li>
+            <li>{{ person.first_name }} {{ person.last_name }}</li>
         {% endfor %}
     </ul>
 {% endblock %}

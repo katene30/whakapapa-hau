@@ -9,7 +9,7 @@ class PersonForm(forms.ModelForm):
 
     class Meta:
         model = Person
-        fields = ['first_name', 'last_name', 'birth_date', 'death_date']
+        fields = ['first_name', 'last_name', 'birth_date', 'death_date', 'is_me']
 
 class PersonAdmin(admin.ModelAdmin):
     form = PersonForm
