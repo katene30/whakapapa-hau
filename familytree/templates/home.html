@@ -1,0 +1,8 @@
+{% block content %}
+    <h1>Family Tree Builder</h1>
+    <ul>
+        {% for person in people %}
+            <li>{{ person.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
