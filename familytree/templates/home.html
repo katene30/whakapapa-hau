@@ -1,8 +1,27 @@
 {% block content %}
-    <h1>Family Tree Builder</h1>
-    <ul>
-        {% for person in people %}
-            <li>{{ person.first_name }} {{ person.last_name }}</li>
-        {% endfor %}
-    </ul>
+  <h1>Family Tree Builder</h1>
+  <ul>
+    {% for person in people %}
+      {% if person.is_me %}
+        <li><h2>{{ person.first_name }} {{ person.last_name }}</h2></li>
+        <ul>
+            <h3>Parents</h3>
+            {% if person.mother %}
+                <li>Mother: {{ person.mother.first_name }} {{ person.mother.last_name }}</li>
+            {% endif %}
+
+            {% if person.father %}
+                <li>Father: {{ person.father.first_name }} {{ person.father.last_name }}</li>
+            {% endif %}
+    
+            {% if person.siblings %}
+                <h3>Siblings</h3>
+                {% for sibling in person.siblings.all %}
+                    <li>{{ sibling.first_name }} {{ sibling.last_name }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    {% endif %}
+    {% endfor %}
+  </ul>
 {% endblock %}
