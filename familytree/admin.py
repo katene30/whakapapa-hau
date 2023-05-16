@@ -4,8 +4,13 @@ from django.contrib import admin
 from .models import Person, Relationship
 
 class PersonForm(forms.ModelForm):
-    birth_date = forms.DateField(input_formats=["%d/%m/%Y"])
-    death_date = forms.DateField(required=False, input_formats=["%d/%m/%Y"])
+    DATE_INPUT_FORMATS = [
+        "%d/%m/%Y", # '30/06/2000'
+        "%Y-%m-%d", # '2000-06-30'
+    ]
+
+    birth_date = forms.DateField(input_formats=DATE_INPUT_FORMATS)
+    death_date = forms.DateField(required=False, input_formats=DATE_INPUT_FORMATS)
 
     class Meta:
         model = Person
