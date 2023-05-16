@@ -5,6 +5,7 @@ from .models import Person, Relationship
 
 class PersonForm(forms.ModelForm):
     birth_date = forms.DateField(input_formats=["%d/%m/%Y"])
+    death_date = forms.DateField(required=False, input_formats=["%d/%m/%Y"])
 
     class Meta:
         model = Person
