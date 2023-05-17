@@ -9,8 +9,6 @@ class Person(models.Model):
 
     father = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_father', null=True, blank=True)
     mother = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_mother', null=True, blank=True)
-    siblings = models.ManyToManyField('self', related_name='related_siblings', blank=True)
-    children = models.ManyToManyField('self', related_name='related_children', blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
