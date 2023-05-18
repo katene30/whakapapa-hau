@@ -12,9 +12,9 @@
                 <li>Father: {{ person.father.first_name }} {{ person.father.last_name }}</li>
             {% endif %}
     
-            {% if person.siblings %}
+            {% if siblings %}
                 <h3>Siblings</h3>
-                {% for sibling in person.siblings.all %}
+                {% for sibling in siblings.all %}
                     <li>{{ sibling.first_name }} {{ sibling.last_name }}</li>
                 {% endfor %}
             {% endif %}
