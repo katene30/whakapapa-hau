@@ -14,8 +14,8 @@ class PersonForm(forms.ModelForm):
         "%Y-%m-%d", # '2000-06-30'
     ]
 
-    birth_date = forms.DateField(input_formats=DATE_INPUT_FORMATS)
-    death_date = forms.DateField(required=False, input_formats=DATE_INPUT_FORMATS)
+    birth_date = forms.DateField(input_formats=DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'type': 'date'}))
+    death_date = forms.DateField(required=False, input_formats=DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'type': 'date'}))
 
     class Meta:
         model = Person
