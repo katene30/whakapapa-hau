@@ -1,8 +1,6 @@
 {% block content %}
   <h1>Family Tree Builder</h1>
   <ul>
-    {% for person in people %}
-      {% if person.is_me %}
         <li><h2>{{ person.first_name }} {{ person.last_name }}</h2></li>
         <ul>
             <h3>Parents</h3>
@@ -21,7 +19,5 @@
                 {% endfor %}
             {% endif %}
         </ul>
-    {% endif %}
-    {% endfor %}
   </ul>
 {% endblock %}

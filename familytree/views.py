@@ -2,8 +2,10 @@ from django.shortcuts import render
 from .models import Person
 
 def home(request):
-    people = Person.objects.all()
+    person = Person.objects.get(is_me=True)
+
+
     context = {
-        'people': people,
+        'person': person,
     }
     return render(request, 'home.html', context)
