@@ -33,7 +33,7 @@ class PersonAdmin(admin.ModelAdmin):
         return format_html_join(
             mark_safe("<br>"),
             "{} {}",
-            ((person.first_name, person.last_name) for person in Person.objects.filter(Q(mother = instance) | Q(father = instance))),
+            ((person.first_name, person.last_name) for person in instance.get_children()),
         )
     
     @admin.display(description="Siblings")

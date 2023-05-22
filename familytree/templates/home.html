@@ -5,7 +5,7 @@
         <ul>
             <h3>Parents</h3>
             {% if person.mother %}
-                <li>Mother: {{ person.mother.first_name }} {{ person.mother.last_name }}</li>
+                <li>Mother: <a href="{{ person.mother.get_url }}"> {{ person.mother.first_name }} {{ person.mother.last_name }}</a></li>
             {% endif %}
 
             {% if person.father %}
@@ -16,6 +16,13 @@
                 <h3>Siblings</h3>
                 {% for sibling in siblings.all %}
                     <li>{{ sibling.first_name }} {{ sibling.last_name }}</li>
+                {% endfor %}
+            {% endif %}
+
+            {% if half_siblings %}
+                <h3>Half Siblings</h3>
+                {% for half_sibling in half_siblings.all %}
+                    <li>{{ half_sibling.first_name }} {{ half_sibling.last_name }}</li>
                 {% endfor %}
             {% endif %}
         </ul>

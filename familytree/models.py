@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Q
+from django.urls import reverse
 
 class Person(models.Model):
     first_name = models.CharField(max_length=50)
@@ -10,8 +12,14 @@ class Person(models.Model):
     father = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_father', null=True, blank=True)
     mother = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_mother', null=True, blank=True)
 
+    def get_children(self):
+        return Person.objects.filter(Q(mother = self) | Q(father = self))
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+    
+    def get_url(self):
+        return reverse('home-by-user', kwargs={'id': self.id})
 
     class Meta:
         verbose_name_plural = "people"
