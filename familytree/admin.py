@@ -29,7 +29,6 @@ class PersonAdmin(admin.ModelAdmin):
     # description functions like a model field's verbose_name
     @admin.display(description="Children")
     def children_list(self, instance):
-        # TODO: Extract filter
         return format_html_join(
             mark_safe("<br>"),
             "{} {}",
@@ -38,12 +37,11 @@ class PersonAdmin(admin.ModelAdmin):
     
     @admin.display(description="Siblings")
     def siblings_list(self, instance):
-        # TODO: Extract filter
-        if(instance.mother is not None and instance.father is not None):
+        if(instance.mother is not None or instance.father is not None):
             return format_html_join(
                 mark_safe("<br>"),
                 "{} {}",
-                ((person.first_name, person.last_name) for person in Person.objects.filter(Q(mother = instance.mother) & Q(father = instance.father)).exclude(Q(id=instance.id) | Q(mother__isnull=True) | Q(father__isnull=True))),
+                ((person.first_name, person.last_name) for person in instance.get_siblings()),
             )
     
     @admin.display(description="Half-Siblings")

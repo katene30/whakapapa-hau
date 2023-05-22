@@ -9,7 +9,7 @@ def home(request, id=1):
     children = root.get_children()
 
     # TODO: Needs refactoring
-    siblings = Person.objects.filter(Q(mother = root.mother) & Q(father = root.father)).exclude(Q(id=root.id) | Q(mother__isnull=True) | Q(father__isnull=True))
+    siblings = root.get_siblings()
 
     # TODO: Needs refactoring
     half_siblings = Person.objects.filter(Q(mother = root.mother) ^ Q(father = root.father)).exclude(Q(id=root.id) | Q(mother=root) | Q(father=root))
