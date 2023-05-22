@@ -12,7 +12,7 @@ def home(request, id=1):
     siblings = root.get_siblings()
 
     # TODO: Needs refactoring
-    half_siblings = Person.objects.filter(Q(mother = root.mother) ^ Q(father = root.father)).exclude(Q(id=root.id) | Q(mother=root) | Q(father=root))
+    half_siblings = root.get_half_siblings()
 
     context = {
         'person': root,
