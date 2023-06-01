@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.db.models import Q
 from .models import Person
 
 
-def home(request, id=1):
+def home(request, id=2):
     root = Person.objects.get(pk = id)
 
     children = root.get_children()

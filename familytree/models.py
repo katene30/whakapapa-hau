@@ -21,6 +21,21 @@ class Person(models.Model):
     def get_half_siblings(self):
         return Person.objects.filter(Q(mother = self.mother) ^ Q(father = self.father)).exclude(Q(id=self.id) | Q(mother__isnull=True) & Q(father__isnull=True))
 
+    def get_grandparents(self):
+        grandparents = Person.objects.none()
+
+        if self.father:
+            grandparents |= Person.objects.filter(
+                Q(id=self.father.father_id) | Q(id=self.father.mother_id)
+            )
+        
+        if self.mother:
+            grandparents |= Person.objects.filter(
+                Q(id=self.mother.father_id) | Q(id=self.mother.mother_id)
+            )
+
+        return grandparents
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     

@@ -24,7 +24,7 @@ class PersonForm(forms.ModelForm):
 class PersonAdmin(admin.ModelAdmin):
     form = PersonForm
 
-    readonly_fields = ["children_list", "siblings_list", "half_siblings_list"]
+    readonly_fields = ["children_list", "siblings_list", "half_siblings_list", "grandparents_list"]
 
     # description functions like a model field's verbose_name
     @admin.display(description="Children")
@@ -52,6 +52,13 @@ class PersonAdmin(admin.ModelAdmin):
                 ((person.first_name, person.last_name) for person in instance.get_half_siblings()),
             )
 
+    @admin.display(description="Grandparents")
+    def grandparents_list(self, instance):
+            return format_html_join(
+                mark_safe("<br>"),
+                "{} {}",
+                ((person.first_name, person.last_name) for person in instance.get_grandparents()),
+            )
 
 
 admin.site.register(Person, PersonAdmin)
