@@ -1,16 +1,18 @@
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
+from .choices import IWI_CHOICES
 
 class Person(models.Model):
+
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     birth_date = models.DateField()
     death_date = models.DateField(null=True, blank=True)
     is_me = models.BooleanField(default=False)
-
     father = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_father', null=True, blank=True)
     mother = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_mother', null=True, blank=True)
+    iwi = models.CharField(max_length=100, choices=IWI_CHOICES, null=True, blank=True)
 
     def get_children(self):
         return Person.objects.filter(Q(mother = self) | Q(father = self))
