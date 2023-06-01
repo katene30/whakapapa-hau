@@ -33,7 +33,7 @@ class Person(models.Model):
             grandparents |= Person.objects.filter(
                 Q(id=self.mother.father_id) | Q(id=self.mother.mother_id)
             )
-
+        
         return grandparents
 
     def __str__(self):

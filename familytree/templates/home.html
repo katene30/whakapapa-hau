@@ -11,7 +11,9 @@
             {% if person.father %}
                 <li>Father: {{ person.father.first_name }} {{ person.father.last_name }}</li>
             {% endif %}
-    
+
+
+
             {% if siblings %}
                 <h3>Siblings</h3>
                 {% for sibling in siblings.all %}
@@ -23,6 +25,13 @@
                 <h3>Half Siblings</h3>
                 {% for half_sibling in half_siblings.all %}
                     <li>{{ half_sibling.first_name }} {{ half_sibling.last_name }}</li>
+                {% endfor %}
+            {% endif %}
+
+            {% if grandparents %}
+                <h3>Grandparents: </h3>
+                {% for grandparent in grandparents.all %}
+                    <li>{{ grandparent.first_name }} {{ grandparent.last_name }}</li>
                 {% endfor %}
             {% endif %}
         </ul>

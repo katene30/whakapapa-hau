@@ -11,10 +11,13 @@ def home(request, id=2):
 
     half_siblings = root.get_half_siblings()
 
+    grandparents = root.get_grandparents()
+
     context = {
         'person': root,
         'children': children,
         'siblings': siblings,
-        'half_siblings': half_siblings
+        'half_siblings': half_siblings,
+        'grandparents': grandparents,
     }
     return render(request, 'home.html', context)
