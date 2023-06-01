@@ -7,10 +7,8 @@ def home(request, id=2):
 
     children = root.get_children()
 
-    # TODO: Needs refactoring
     siblings = root.get_siblings()
 
-    # TODO: Needs refactoring
     half_siblings = root.get_half_siblings()
 
     context = {
