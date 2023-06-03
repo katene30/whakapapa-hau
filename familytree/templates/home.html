@@ -2,6 +2,9 @@
   <h1>Family Tree Builder</h1>
   <ul>
         <li><h2>{{ person.first_name }} {{ person.last_name }}</h2></li>
+        {% if person.birth_date%}
+        <li><h3>{{ person.birth_date }}{% if person.death_date %} - {{ person.death_date }} {% endif%}</h3></li>
+        {%endif%}
         <ul>
             {% if person.iwi %}
                 <h3>Iwi</h3>
