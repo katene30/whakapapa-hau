@@ -3,7 +3,7 @@
   <ul>
         <li><h2>{{ person.first_name }} {{ person.last_name }}</h2></li>
         {% if person.birth_date%}
-        <li><h3>{{ person.birth_date }}{% if person.death_date %} - {{ person.death_date }} {% endif%}</h3></li>
+        <li><h3>{{ person.birth_date|date:"d/m/Y" }}{% if person.death_date %} - {{ person.death_date|date:"d/m/Y" }} {% endif%}</h3></li>
         {%endif%}
         <ul>
             {% if person.iwi %}
