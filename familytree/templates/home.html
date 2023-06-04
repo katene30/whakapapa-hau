@@ -10,7 +10,7 @@
                 <h3>Iwi</h3>
                 <li>{{ person.iwi }}</li>
             {% endif %}
-            <h3>Parents</h3>
+
             {% if person.mother %}
                 <li>Mother: <a href="{{ person.mother.get_url }}"> {{ person.mother.first_name }} {{ person.mother.last_name }}</a></li>
             {% endif %}
