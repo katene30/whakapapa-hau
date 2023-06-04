@@ -11,6 +11,16 @@
                 <li>{{ person.iwi }}</li>
             {% endif %}
 
+            {% if children %}
+                <h3>Children</h3>
+                {% for child in children.all %}
+                    <li>{{ child.first_name }} {{ child.last_name }}</li>
+                {% endfor %}
+            {% endif %}
+
+            {% if person.mother or person.father %}
+                <h3>Parent(s)</h3>
+            {% endif %}
             {% if person.mother %}
                 <li>Mother: <a href="{{ person.mother.get_url }}"> {{ person.mother.first_name }} {{ person.mother.last_name }}</a></li>
             {% endif %}
@@ -18,8 +28,6 @@
             {% if person.father %}
                 <li>Father: {{ person.father.first_name }} {{ person.father.last_name }}</li>
             {% endif %}
-
-
 
             {% if siblings %}
                 <h3>Siblings</h3>
