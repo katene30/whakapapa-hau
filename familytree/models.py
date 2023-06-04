@@ -13,6 +13,7 @@ class Person(models.Model):
     father = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_father', null=True, blank=True)
     mother = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_mother', null=True, blank=True)
     iwi = models.CharField(max_length=100, choices=IWI_CHOICES, null=True, blank=True)
+    hapu = models.CharField(max_length=100, null=True, blank=True)
 
     def get_children(self):
         return Person.objects.filter(Q(mother = self) | Q(father = self))

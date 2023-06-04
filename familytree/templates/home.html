@@ -11,6 +11,11 @@
                 <li>{{ person.iwi }}</li>
             {% endif %}
 
+            {% if person.hapu %}
+                <h3>Hapu</h3>
+                <li>{{ person.hapu }}</li>
+            {% endif %}
+
             {% if children %}
                 <h3>Children</h3>
                 {% for child in children.all %}
