@@ -39,6 +39,22 @@ class Person(models.Model):
         
         return grandparents
 
+    def build_hierarchy(self,depth):
+        hierarchy = {
+            "name": self.first_name,
+            "children": []
+        }
+
+        if depth < 1:
+            return hierarchy
+        
+        children = self.get_children()
+        for child in children:
+            hierarchy["children"].append(child.build_hierarchy(depth-1))
+
+        return hierarchy
+
+    
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
@@ -62,3 +78,7 @@ class Relationship(models.Model):
 
     def __str__(self):
         return f"{self.from_person} {self.relationship_type} {self.to_person}"
+    
+class PersonMedia(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='media')
+    image = models.FileField(blank=True, null=True)

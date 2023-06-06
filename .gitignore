@@ -176,3 +176,5 @@ cython_debug/
 *.pyc
 
 .DS_Store
+
+/var/media

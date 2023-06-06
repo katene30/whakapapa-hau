@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+
 from .models import Person
 
 
@@ -13,6 +15,10 @@ def home(request, id=2):
 
     grandparents = root.get_grandparents()
 
+
+
+
+
     context = {
         'person': root,
         'children': children,
@@ -21,3 +27,8 @@ def home(request, id=2):
         'grandparents': grandparents,
     }
     return render(request, 'home.html', context)
+
+def family_tree(request, id=2):
+    root = Person.objects.get(pk = id)
+    hierarchy = root.build_hierarchy(3)
+    return JsonResponse(hierarchy)

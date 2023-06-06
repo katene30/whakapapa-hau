@@ -6,6 +6,11 @@
         <li><h3>{{ person.birth_date|date:"d/m/Y" }}{% if person.death_date %} - {{ person.death_date|date:"d/m/Y" }} {% endif%}</h3></li>
         {%endif%}
         <ul>
+
+            {% for picture in person.media.all%}
+                <li>{{picture.image.url}}</li>
+                <img src="{{picture.image.url}}" >
+            {%endfor%}
             {% if person.iwi %}
                 <h3>Iwi</h3>
                 <li>{{ person.iwi }}</li>
