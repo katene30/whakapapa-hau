@@ -39,9 +39,10 @@ class Person(models.Model):
         
         return grandparents
 
-    def build_hierarchy(self,depth):
+    def get_descendants(self,depth):
         hierarchy = {
-            "name": self.first_name,
+            "first name": self.first_name,
+            "last name": self.last_name,
             "children": []
         }
 
@@ -50,10 +51,29 @@ class Person(models.Model):
         
         children = self.get_children()
         for child in children:
-            hierarchy["children"].append(child.build_hierarchy(depth-1))
+            hierarchy["children"].append(child.get_descendants(depth-1))
 
         return hierarchy
+    
+    def get_ancestors(self, depth):
+        hierarchy = {
+            "first name": self.first_name,
+            "last name": self.last_name,
+            "parents": []
+        }
 
+        father = self.father
+        mother = self.mother
+
+        if depth < 1:
+            return hierarchy
+        if father:
+            hierarchy["parents"].append(father.get_ancestors(depth - 1))
+        
+        if mother:
+            hierarchy["parents"].append(mother.get_ancestors(depth - 1))
+
+        return hierarchy
     
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

@@ -6,5 +6,6 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('<int:id>', views.home, name='home-by-user'),
-    path('api/person/<int:id>', views.family_tree, name='family-tree-by-id'),
+    path('api/person/descendants/<int:id>', views.descendants, name='descendants-by-id'),
+    path('api/person/ancestors/<int:id>', views.ancestors, name='ancestors-by-id'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

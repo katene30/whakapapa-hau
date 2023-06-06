@@ -28,7 +28,12 @@ def home(request, id=2):
     }
     return render(request, 'home.html', context)
 
-def family_tree(request, id=2):
+def descendants(request, id=2):
     root = Person.objects.get(pk = id)
-    hierarchy = root.build_hierarchy(3)
+    hierarchy = root.get_descendants(3)
+    return JsonResponse(hierarchy)
+
+def ancestors(request, id=2):
+    root = Person.objects.get(pk = id)
+    hierarchy = root.get_ancestors(3)
     return JsonResponse(hierarchy)
