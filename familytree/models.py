@@ -101,4 +101,6 @@ class Relationship(models.Model):
     
 class PersonMedia(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='media')
-    image = models.FileField(blank=True, null=True)
+    file = models.FileField(blank=True, null=True)
+    alt_text = models.CharField(max_length=50, blank=True, null=True, help_text='Provide alternative text for the image. Alt text is used by screen readers to describe the image for visually impaired users.')
+    title = models.CharField(max_length=100)

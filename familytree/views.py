@@ -15,10 +15,6 @@ def home(request, id=2):
 
     grandparents = root.get_grandparents()
 
-
-
-
-
     context = {
         'person': root,
         'children': children,
