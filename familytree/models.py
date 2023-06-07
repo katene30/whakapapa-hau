@@ -104,6 +104,9 @@ class PersonMedia(models.Model):
     alt_text = models.CharField(max_length=50, blank=True, null=True, help_text='Provide alternative text for the image. Alt text is used by screen readers to describe the image for visually impaired users.')
     title = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name_plural = "person media"
 
@@ -111,5 +114,8 @@ class PersonIwi(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='iwi')
     iwi = models.CharField(max_length=100, choices=IWI_CHOICES, null=True, blank=True)
 
+    def __str__(self):
+        return self.iwi
+    
     class Meta:
         verbose_name_plural = "iwi"
