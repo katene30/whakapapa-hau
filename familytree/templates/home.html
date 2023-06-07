@@ -14,7 +14,9 @@
             {%endfor%}
             {% if person.iwi %}
                 <h3>Iwi</h3>
-                <li>{{ person.iwi }}</li>
+                {%for iwi in person.iwi%}
+                    <li>{{ iwi }}</li>
+                {%endfor%}
             {% endif %}
 
             {% if person.hapu %}

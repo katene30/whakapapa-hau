@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
+from multiselectfield import MultiSelectField
 from .choices import IWI_CHOICES
 
 class Person(models.Model):
@@ -12,7 +13,7 @@ class Person(models.Model):
     is_me = models.BooleanField(default=False)
     father = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_father', null=True, blank=True)
     mother = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_mother', null=True, blank=True)
-    iwi = models.CharField(max_length=100, choices=IWI_CHOICES, null=True, blank=True)
+    iwi = MultiSelectField(max_length=100, choices=IWI_CHOICES, null=True, blank=True)
     hapu = models.CharField(max_length=100, null=True, blank=True)
 
     def get_children(self):
