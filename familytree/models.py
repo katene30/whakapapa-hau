@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
-from multiselectfield import MultiSelectField
 from .choices import IWI_CHOICES
 
 class Person(models.Model):
