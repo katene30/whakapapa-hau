@@ -13,7 +13,6 @@ class Person(models.Model):
     is_me = models.BooleanField(default=False)
     father = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_father', null=True, blank=True)
     mother = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_mother', null=True, blank=True)
-    iwi = MultiSelectField(max_length=100, choices=IWI_CHOICES, null=True, blank=True)
     hapu = models.CharField(max_length=100, null=True, blank=True)
 
     def get_children(self):
@@ -108,3 +107,10 @@ class PersonMedia(models.Model):
 
     class Meta:
         verbose_name_plural = "person media"
+
+class PersonIwi(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='iwi')
+    iwi = models.CharField(max_length=100, choices=IWI_CHOICES, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "iwi"

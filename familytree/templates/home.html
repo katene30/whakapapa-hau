@@ -8,15 +8,18 @@
         {%endif%}
         <ul>
 
-            {% for media_file in person.media.all%}
-                <li><a href="{{ media_file.file.url }}" target="_blank">{{media_file.title}}</a></li>
-                {% comment %} TODO {% endcomment %}
-                {% comment %} <img src="{{picture.image.url}}" alt="{{picture.alt_text}}"> {% endcomment %}
-            {%endfor%}
+            {% if person.media %}
+                {% for media_file in person.media.all%}
+                    <li><a href="{{ media_file.file.url }}" target="_blank">{{media_file.title}}</a></li>
+                    {% comment %} TODO {% endcomment %}
+                    {% comment %} <img src="{{picture.image.url}}" alt="{{picture.alt_text}}"> {% endcomment %}
+                {%endfor%}
+            {% endif %}
+
             {% if person.iwi %}
                 <h3>Iwi</h3>
-                {%for iwi in person.iwi%}
-                    <li>{{ iwi }}</li>
+                {%for iwi_object in person.iwi.all%}
+                    <li>{{ iwi_object.iwi }}</li>
                 {%endfor%}
             {% endif %}
 
