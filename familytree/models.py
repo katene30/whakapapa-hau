@@ -1,7 +1,9 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
 from .choices import IWI_CHOICES
+
 
 class Person(models.Model):
 
@@ -73,6 +75,14 @@ class Person(models.Model):
 
         return hierarchy
     
+    def clean(self):
+        if self.is_me:
+            # Check if there is any other Person instance with is_me=True
+            if Person.objects.filter(is_me=True).exclude(pk=self.pk).exists():
+                raise ValidationError("Only one person can be marked as 'me'.")
+        
+        super().clean()
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
