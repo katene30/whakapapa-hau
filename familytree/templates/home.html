@@ -8,7 +8,7 @@
         {%endif%}
         <ul>
 
-            {% if person.media %}
+            {% if person.media.all %}
                 {% for media_file in person.media.all%}
                     <li><a href="{{ media_file.file.url }}" target="_blank">{{media_file.title}}</a></li>
                     {% comment %} TODO {% endcomment %}
@@ -16,7 +16,7 @@
                 {%endfor%}
             {% endif %}
 
-            {% if person.iwi %}
+            {% if person.iwi.all %}
                 <h3>Iwi</h3>
                 {%for iwi_object in person.iwi.all%}
                     <li>{{ iwi_object.iwi }}</li>
