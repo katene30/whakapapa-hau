@@ -4,11 +4,11 @@
   <ul>
         <li><h2>{{ person.first_name }} {{ person.last_name }}</h2></li>
         {% if person.birth_date%}
-        <li><h3>{{ person.birth_date|date:"d/m/Y" }}{% if person.death_date %} - {{ person.death_date|date:"d/m/Y" }} {% endif%}</h3></li>
+        <li><p>{{ person.birth_date|date:"d/m/Y" }}{% if person.death_date %} - {{ person.death_date|date:"d/m/Y" }} {% endif%}</p></li>
         {%endif%}
         <ul>
-
             {% if person.media.all %}
+                <h3>Media</h3>
                 {% for media_file in person.media.all%}
                     <li><a href="{{ media_file.file.url }}" target="_blank">{{media_file.title}}</a></li>
                     {% comment %} TODO {% endcomment %}
@@ -23,9 +23,11 @@
                 {%endfor%}
             {% endif %}
 
-            {% if person.hapu %}
+            {% if person.hapu.all %}
                 <h3>Hapu</h3>
-                <li>{{ person.hapu }}</li>
+                {% for hapu_object in person.hapu.all %}
+                    <li>{{ hapu_object.hapu }}</li>
+                {% endfor %}
             {% endif %}
 
             {% if children %}
