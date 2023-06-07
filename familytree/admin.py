@@ -26,11 +26,40 @@ class PersonMediaInline(admin.TabularInline):
 
 class PersonAdmin(admin.ModelAdmin):
     form = PersonForm
+    
     inlines = [
         PersonMediaInline
     ]
 
     readonly_fields = ["children_list", "siblings_list", "half_siblings_list", "grandparents_list"]
+
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": ["first_name", "last_name", "birth_date", "death_date", "is_me", "father", "mother"],
+            },
+        ),
+        (
+            "Iwi",
+            {
+                "classes": ["collapse"],
+                "fields": ["iwi"],
+            },
+        ),
+        (
+             None,
+             {
+                  "fields":["hapu"],
+             },
+        ),
+        (
+             "Family Information",
+             {
+               "fields": ["children_list","siblings_list", "half_siblings_list", "grandparents_list"],
+             },
+        ),
+    ]
 
     # description functions like a model field's verbose_name
     @admin.display(description="Children")
