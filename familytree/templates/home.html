@@ -62,9 +62,23 @@
             {% endif %}
             {% if person.media.all %}
                 <h3>Media</h3>
-                {% for media_file in person.media.all%}
-                    <li>{{media_file.title}}</li>
-                    <img src="{{media_file.image.url}}" alt="{{media_file.alt_text}}">
+                {% for media_object in person.media.all%}
+                    <li>{{media_object.title}}</li>
+                    <img src="{{media_object.image.url}}" alt="{{media_object.alt_text}}">
+                {%endfor%}
+            {% endif %}
+            {% if person.video.all %}
+                <h3>Videos</h3>
+                {% for video_object in person.video.all%}
+                    <li>{{video_object.title}}</li>
+                    
+                    <iframe width="560" height="315"
+                     src="{{video_object.video_url}}" title="YouTube video player"
+                     frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                     allowfullscreen></iframe>
+
+                    <p>Uploaded at: {{video_object.upload_date}}</p>
+
                 {%endfor%}
             {% endif %}
             {% if person.documentation.all%}

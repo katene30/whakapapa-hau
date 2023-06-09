@@ -117,8 +117,22 @@ class PersonMedia(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "media"
-        verbose_name_plural = "media"
+        verbose_name = "Media"
+        verbose_name_plural = "Media"
+
+class PersonVideo(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='video')
+    video_url = models.URLField()
+    title = models.CharField(max_length=100)
+    upload_date = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Video"
+        verbose_name_plural = "Videos"
 
 class PersonDocument(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='documentation')
@@ -129,7 +143,7 @@ class PersonDocument(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "document"
+        verbose_name = "Document"
 
 class PersonIwi(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='iwi')
@@ -139,7 +153,7 @@ class PersonIwi(models.Model):
         return self.iwi
     
     class Meta:
-        verbose_name_plural = "iwi"
+        verbose_name_plural = "Iwi"
 
 class PersonHapu(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='hapu')
@@ -149,4 +163,4 @@ class PersonHapu(models.Model):
         return self.hapu
     
     class Meta:
-        verbose_name_plural = "hapu"
+        verbose_name_plural = "Hapu"

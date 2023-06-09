@@ -4,7 +4,7 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 from django.db.models import Q
 
-from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument
+from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo
 
 class PersonForm(forms.ModelForm):
 
@@ -24,6 +24,9 @@ class PersonForm(forms.ModelForm):
 class PersonMediaInline(admin.TabularInline):
     model = PersonMedia
 
+class PersonVideoInline(admin.TabularInline):
+    model = PersonVideo
+
 class PersonDocumentInline(admin.TabularInline):
     model = PersonDocument
 
@@ -40,6 +43,7 @@ class PersonAdmin(admin.ModelAdmin):
         PersonIwiInline,
         PersonHapuInline,
         PersonMediaInline,
+        PersonVideoInline,
         PersonDocumentInline,
     ]
 
