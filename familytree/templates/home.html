@@ -9,10 +9,9 @@
         <ul>
             {% if person.media.all %}
                 <h3>Media</h3>
-                {% for media_file in person.media.all%}
-                    <li><a href="{{ media_file.file.url }}" target="_blank">{{media_file.title}}</a></li>
-                    {% comment %} TODO {% endcomment %}
-                    {% comment %} <img src="{{picture.image.url}}" alt="{{picture.alt_text}}"> {% endcomment %}
+                {% for media in person.media.all%}
+                    <li>{{media.title}}</li>
+                    <img src="{{media.image.url}}" alt="{{media.alt_text}}">
                 {%endfor%}
             {% endif %}
 
