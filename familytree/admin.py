@@ -25,6 +25,10 @@ class PersonMediaInline(admin.TabularInline):
     model = PersonMedia
 
 class PersonVideoInline(admin.TabularInline):
+    def get_exclude(self, request, obj=None):
+        if obj:  # Exclude 'video_id' field when editing an existing PersonVideo instance
+            return ['video_id']
+        return []  # Show 'video_id' field when creating a new PersonVideo instance
     model = PersonVideo
 
 class PersonDocumentInline(admin.TabularInline):

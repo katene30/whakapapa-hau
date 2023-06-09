@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.urls import reverse
 from .choices import IWI_CHOICES
 
+from urllib.parse import urlparse, parse_qs
+
 
 class Person(models.Model):
 
@@ -123,12 +125,23 @@ class PersonMedia(models.Model):
 class PersonVideo(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='video')
     video_url = models.URLField()
+    video_id = models.CharField(max_length=20, blank=True, null=True)
     title = models.CharField(max_length=100)
     upload_date = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        # Extract video ID from the URL
+        if self.video_url:
+            parsed_url = urlparse(self.video_url)
+            query_params = parse_qs(parsed_url.query)
+            video_id = query_params.get('v')
+            self.video_id = video_id[0]
+        super().save(*args, **kwargs)
+
 
     class Meta:
         verbose_name = "Video"
