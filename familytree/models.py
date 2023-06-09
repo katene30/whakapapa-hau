@@ -117,7 +117,19 @@ class PersonMedia(models.Model):
         return self.title
 
     class Meta:
-        verbose_name_plural = "person media"
+        verbose_name = "media"
+        verbose_name_plural = "media"
+
+class PersonDocument(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='documentation')
+    file = models.FileField()
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "document"
 
 class PersonIwi(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='iwi')

@@ -7,13 +7,6 @@
         <li><p>{{ person.birth_date|date:"d/m/Y" }}{% if person.death_date %} - {{ person.death_date|date:"d/m/Y" }} {% endif%}</p></li>
         {%endif%}
         <ul>
-            {% if person.media.all %}
-                <h3>Media</h3>
-                {% for media in person.media.all%}
-                    <li>{{media.title}}</li>
-                    <img src="{{media.image.url}}" alt="{{media.alt_text}}">
-                {%endfor%}
-            {% endif %}
 
             {% if person.iwi.all %}
                 <h3>Iwi</h3>
@@ -65,6 +58,19 @@
                 <h3>Grandparents: </h3>
                 {% for grandparent in grandparents.all %}
                     <li><a href="{{ grandparent.get_url }}">{{ grandparent.first_name }} {{ grandparent.last_name }}</a></li>
+                {% endfor %}
+            {% endif %}
+            {% if person.media.all %}
+                <h3>Media</h3>
+                {% for media_file in person.media.all%}
+                    <li>{{media_file.title}}</li>
+                    <img src="{{media_file.image.url}}" alt="{{media_file.alt_text}}">
+                {%endfor%}
+            {% endif %}
+            {% if person.documentation.all%}
+                <h3>Documents</h3>
+                {% for document_object in person.documentation.all %}
+                    <li><a href="{{ document_object.file.url }}" target="_blank">{{document_object.title}}</a></li>
                 {% endfor %}
             {% endif %}
         </ul>

@@ -4,7 +4,7 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 from django.db.models import Q
 
-from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu
+from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument
 
 class PersonForm(forms.ModelForm):
 
@@ -24,6 +24,9 @@ class PersonForm(forms.ModelForm):
 class PersonMediaInline(admin.TabularInline):
     model = PersonMedia
 
+class PersonDocumentInline(admin.TabularInline):
+    model = PersonDocument
+
 class PersonIwiInline(admin.TabularInline):
     model = PersonIwi
 
@@ -37,6 +40,7 @@ class PersonAdmin(admin.ModelAdmin):
         PersonIwiInline,
         PersonHapuInline,
         PersonMediaInline,
+        PersonDocumentInline,
     ]
 
     readonly_fields = ["children_list", "siblings_list", "half_siblings_list", "grandparents_list"]
