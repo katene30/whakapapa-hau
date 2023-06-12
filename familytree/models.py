@@ -18,12 +18,18 @@ class Person(models.Model):
     mother = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='related_mother', null=True, blank=True)
 
     def get_children(self):
+        if self.pk is None:
+            # Person instance has not been saved yet, return an empty queryset
+            return Person.objects.none()
         return Person.objects.filter(Q(mother = self) | Q(father = self))
     
     def get_siblings(self):
         return Person.objects.filter(Q(mother = self.mother) & Q(father = self.father)).exclude(Q(id=self.id) | Q(mother__isnull=True) | Q(father__isnull=True))
     
     def get_half_siblings(self):
+        if self.pk is None:
+            # Person instance has not been saved yet, return an empty queryset
+            return Person.objects.none()
         return Person.objects.filter(Q(mother = self.mother) ^ Q(father = self.father)).exclude(Q(id=self.id) | Q(mother__isnull=True) & Q(father__isnull=True))
 
     def get_grandparents(self):
