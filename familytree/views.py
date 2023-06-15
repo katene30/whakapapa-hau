@@ -4,8 +4,14 @@ from django.http import JsonResponse
 from .models import Person
 
 
-def home(request, id=2):
-    root = Person.objects.get(pk = id)
+def home(request, id=None):
+    current_user = Person.objects.get(is_me=True)
+
+    if id is None:
+        root = current_user
+    else:
+        root = Person.objects.get(pk = id)
+
 
     children = root.get_children()
 
@@ -21,6 +27,7 @@ def home(request, id=2):
         'siblings': siblings,
         'half_siblings': half_siblings,
         'grandparents': grandparents,
+        'current_user': current_user
     }
     return render(request, 'home.html', context)
 
