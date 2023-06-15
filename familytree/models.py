@@ -26,14 +26,20 @@ class Person(models.Model):
     def get_siblings(self):
         return Person.objects.filter(Q(mother = self.mother) & Q(father = self.father)).exclude(Q(id=self.id) | Q(mother__isnull=True) | Q(father__isnull=True))
 
-    # TODO: it's doing a search with the parent that's not there    
     def get_half_siblings(self):
         if self.pk is None:
             # Person instance has not been saved yet, return an empty queryset
             return Person.objects.none()
         
-        if self.mother or self.father and not self.father and not self.mother:
-            return Person.objects.filter(Q(mother = self.mother) ^ Q(father = self.father)).exclude(Q(id = self.id) | Q(mother__isnull = True) & Q(father__isnull = True))
+        if self.mother or self.father:
+            half_siblings = Person.objects.filter(Q(mother = self.mother) ^ Q(father = self.father)).exclude(Q(id = self.id) | Q(mother__isnull = True) & Q(father__isnull = True))
+
+            # Remove instances where the two people share a Null parent
+            for half_sibling in half_siblings:
+                if half_sibling.father is None and self.father is None or half_sibling.mother is None and self.mother is None:
+                    half_siblings = half_siblings.exclude(Q(id=half_sibling.id))
+                    
+            return half_siblings
         
         return Person.object.none()
 
