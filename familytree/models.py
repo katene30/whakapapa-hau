@@ -31,8 +31,11 @@ class Person(models.Model):
         if self.pk is None:
             # Person instance has not been saved yet, return an empty queryset
             return Person.objects.none()
-
-        return Person.objects.filter(Q(mother = self.mother) ^ Q(father = self.father)).exclude(Q(id = self.id) | Q(mother__isnull = True) & Q(father__isnull = True))
+        
+        if self.mother or self.father and not self.father and not self.mother:
+            return Person.objects.filter(Q(mother = self.mother) ^ Q(father = self.father)).exclude(Q(id = self.id) | Q(mother__isnull = True) & Q(father__isnull = True))
+        
+        return Person.object.none()
 
     def get_grandparents(self):
         grandparents = Person.objects.none()
