@@ -60,6 +60,7 @@ class Person(models.Model):
 
     def get_descendants(self,depth):
         hierarchy = {
+            "id": self.id,
             "first name": self.first_name,
             "last name": self.last_name,
             "children": []
@@ -76,6 +77,7 @@ class Person(models.Model):
     
     def get_ancestors(self, depth):
         hierarchy = {
+            "id": self.id,
             "first name": self.first_name,
             "last name": self.last_name,
             "parents": []
