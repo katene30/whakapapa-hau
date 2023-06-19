@@ -1,16 +1,22 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
+from django.shortcuts import get_object_or_404
 
 from .models import Person
 
 
 def home(request, id=None):
-    current_user = Person.objects.get(is_me=True)
+    root = None
+    current_user = Person.objects.filter(is_me=True).first()
 
     if id is None:
+        if current_user is None:
+            raise Http404
+        
         root = current_user
     else:
-        root = Person.objects.get(pk = id)
+        root = get_object_or_404(Person, pk=id)
+
 
 
     children = root.get_children()

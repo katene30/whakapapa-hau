@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>{% block title %}Whakapapa Hau{% endblock %}</title>
     {% block extra_css %}{% endblock %}
+
 </head>
 <body>
     <header>
         <!-- Add your header content here -->
+        {%if current_user%}
         <a href="{{ current_user.get_url }}">Back to me</a>
+        {%endif%}
     </header>
 
     <nav>

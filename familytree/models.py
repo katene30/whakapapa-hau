@@ -4,7 +4,6 @@ from django.db.models import Q
 from django.urls import reverse
 from .choices import IWI_CHOICES
 import re
-from urllib.parse import urlparse, parse_qs
 
 
 class Person(models.Model):
