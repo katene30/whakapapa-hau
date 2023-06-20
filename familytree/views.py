@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, Http404
 from django.shortcuts import get_object_or_404
 
-from .models import Person
+from .models import Person, Whanau
 
 
 def home(request, id=None):
@@ -36,6 +36,19 @@ def home(request, id=None):
         'current_user': current_user
     }
     return render(request, 'home.html', context)
+
+def whanau(request, id=None):
+    root = Whanau.objects.get(pk = id)
+
+    if root is None:
+        raise Http404
+
+    context = {
+        'whanau': root,
+    }
+    
+    return render(request, 'whanau.html', context)
+    
 
 def descendants(request, id=2):
     root = Person.objects.get(pk = id)
