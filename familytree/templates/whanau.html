@@ -6,7 +6,7 @@
     <h2>Whanau Members:</h2>
         <ul>
             {% for whanau_member in whanau.members.all %}
-                <li>{{whanau_member.first_name}} {{whanau_member.last_name}}</li>
+                <li><a href="{{whanau_member.get_url}}">{{whanau_member.first_name}} {{whanau_member.last_name}}</a></li>
             {% endfor %}
         </ul>
     {% endif %}

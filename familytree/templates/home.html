@@ -38,7 +38,7 @@
             {% if children %}
                 <h3>Children</h3>
                 {% for child in children.all %}
-                    <li>{{ child.first_name }} {{ child.last_name }}</li>
+                    <li><a href="{{ child.get_url }}">{{ child.first_name }} {{ child.last_name }}</a></li>
                 {% endfor %}
             {% endif %}
 
