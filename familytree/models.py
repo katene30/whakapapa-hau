@@ -276,9 +276,8 @@ class Whanau(models.Model):
     name = models.CharField(max_length=100, unique=True)
     members = models.ManyToManyField(Person, related_name='whanau')
 
-
     def get_url(self):
-        return reverse('home-by-user', kwargs={'id': self.id})
+        return reverse('whanau-by-id', kwargs={'id': self.id})
     
     def __str__(self):
         return self.name

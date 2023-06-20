@@ -7,7 +7,9 @@
             <li><h2>Whanau:</h2></li>
             {% for whanau in person.whanau.all %}
                 <ul>
-                    <li><h2>{{ whanau.name}}</h2></li>
+                    <li>
+                        <h2><a href="{{whanau.get_url}}">{{ whanau.name}}</a></h2>
+                    </li>
                 </ul>
             {% endfor %}
         {% endif %}

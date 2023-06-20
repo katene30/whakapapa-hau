@@ -3,6 +3,7 @@
     <h1>{{ whanau.name }} Whanau</h1>
 
     {% if whanau.members.all %}
+    <h2>Whanau Members:</h2>
         <ul>
             {% for whanau_member in whanau.members.all %}
                 <li>{{whanau_member.first_name}} {{whanau_member.last_name}}</li>
