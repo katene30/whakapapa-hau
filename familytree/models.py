@@ -10,6 +10,7 @@ class Person(models.Model):
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    maiden_name = models.CharField(max_length=50,null=True, blank=True, help_text="Enter the previous surname or any other name used before marriage. Leave this field blank if not applicable.")
     birth_date = models.DateField()
     death_date = models.DateField(null=True, blank=True)
     is_me = models.BooleanField(default=False)
