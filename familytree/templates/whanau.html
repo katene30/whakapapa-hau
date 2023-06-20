@@ -19,6 +19,11 @@
                     <div>
                         <h4>{{waiata.name}}</h4>
                     </div>
+
+                    {% if waiata.songwriter %}
+                        <div>Songwriter: {{ waiata.songwriter }}</div>
+                    {% endif %}
+
                     {% if waiata.description %}
                         <div>{{waiata.description}}</div>
                     {% endif %}
@@ -33,7 +38,7 @@
                     {% if waiata.file %}
                         <div><a href="{{ waiata.file.url }}" target="_blank">{{waiata.file.name}}</a></div>
                     {% endif %}
-                    
+
                     {% if waiata.video_id %}
                             <div><h5>{{waiata.video_title}}</div></h5>
         
