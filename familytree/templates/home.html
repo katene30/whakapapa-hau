@@ -5,10 +5,10 @@
   <ul>
         <li><h2>{{ person.first_name }} {{ person.last_name }}</h2></li>
         {% if person.maiden_name %}
-            <li><h2>Maiden Name: {{ person.maiden_name }}</h2></li>
+            <li><h3>Maiden Name: {{ person.maiden_name }}</h3></li>
         {% endif %}
         {% if person.birth_date%}
-        <li><p>{{ person.birth_date|date:"d/m/Y" }}{% if person.death_date %} - {{ person.death_date|date:"d/m/Y" }} {% endif%}</p></li>
+        <li><h3>{{ person.birth_date|date:"d/m/Y" }}{% if person.death_date %} - {{ person.death_date|date:"d/m/Y" }} {% endif%}</h3></li>
         {%endif%}
 
             {% if person.iwi.all %}
