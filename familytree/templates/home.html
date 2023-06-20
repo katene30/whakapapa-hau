@@ -3,6 +3,14 @@
 
   <h1>Family Tree Builder</h1>
   <ul>
+        {% if person.whanau.all %}
+            <li><h2>Whanau:</h2></li>
+            {% for whanau in person.whanau.all %}
+                <ul>
+                    <li><h2>{{ whanau.name}}</h2></li>
+                </ul>
+            {% endfor %}
+        {% endif %}
         <li><h2>{{ person.first_name }} {{ person.last_name }}</h2></li>
         {% if person.maiden_name %}
             <li><h3>Maiden Name: {{ person.maiden_name }}</h3></li>

@@ -4,7 +4,7 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 from django.db.models import Q
 
-from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo
+from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau
 
 class PersonForm(forms.ModelForm):
 
@@ -48,7 +48,7 @@ class PersonAdmin(admin.ModelAdmin):
         PersonDocumentInline,
     ]
 
-    readonly_fields = ["children_list", "siblings_list", "half_siblings_list", "grandparents_list"]
+    readonly_fields = ["whanau_list", "children_list", "siblings_list", "half_siblings_list", "grandparents_list"]
 
     # description functions like a model field's verbose_name
     @admin.display(description="Children")
@@ -83,7 +83,16 @@ class PersonAdmin(admin.ModelAdmin):
                 "{} {}",
                 ((person.first_name, person.last_name) for person in instance.get_grandparents()),
             )
+    
+    @admin.display(description="Whanau")
+    def whanau_list(self, instance):
+        return format_html_join(
+            mark_safe("<br>"),
+            "{}",
+            ((whanau.name,) for whanau in instance.whanau.all()),
+        )
 
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Relationship)
+admin.site.register(Whanau)

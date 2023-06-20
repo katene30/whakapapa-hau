@@ -41,7 +41,7 @@ class Person(models.Model):
                     
             return half_siblings
         
-        return Person.object.none()
+        return Person.objects.none()
 
     def get_grandparents(self):
         grandparents = Person.objects.none()
@@ -271,3 +271,14 @@ class PersonHapu(models.Model):
     
     class Meta:
         verbose_name_plural = "Hapu"
+
+class Whanau(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    members = models.ManyToManyField(Person, related_name='whanau')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Whanau"
+        
