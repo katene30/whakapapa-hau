@@ -302,4 +302,16 @@ class WhanauWaiata(VideoMixin, models.Model):
 
     class Meta:
         abstract = False
+        verbose_name_plural = "Waiata"
     
+class WhanauHaka(VideoMixin, models.Model):
+    whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='haka')
+    name = models.CharField(max_length=100)
+    composer = models.CharField(max_length=100, null=True, blank=True)
+    description = models.CharField(max_length=500, null=True, blank=True)
+    lyrics = models.TextField(max_length=2000, null=True, blank=True)
+    file = models.FileField(null=True, blank=True)
+
+    class Meta:
+        abstract = False
+        verbose_name_plural = "Haka"

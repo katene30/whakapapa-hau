@@ -21,11 +21,18 @@
                     </div>
 
                     {% if waiata.songwriter %}
-                        <div>Songwriter: {{ waiata.songwriter }}</div>
+                        <div>
+                            <h5>Songwriter:</h5>
+                            <p>{{waiata.songwriter}}</p>
+                        </div>
                     {% endif %}
 
                     {% if waiata.description %}
                         <div>{{waiata.description}}</div>
+                        <div>
+                            <h5>Description:</h5>
+                            <p>{{waiata.description}}</p>
+                        </div>
                     {% endif %}
 
                     {% if waiata.lyrics %}
@@ -55,6 +62,66 @@
                                     width="640"
                                     height="385"
                                     src="https://player.vimeo.com/video/{{ waiata.video_id }}"
+                                    allow="autoplay; encrypted-media"
+                                    allowfullscreen>
+                            </iframe>
+                        {% endif %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if whanau.haka.all %}
+    <h3>Whanau Haka:</h3>
+        <ul>
+            {% for haka in whanau.haka.all %}
+                <li>
+                    <div>
+                        <h4>{{haka.name}}</h4>
+                    </div>
+
+                    {% if haka.composer %}
+                        <div>
+                            <h5>Composer:</h5>
+                            <p>{{haka.composer}}</p>
+                        </div>
+                    {% endif %}
+
+                    {% if haka.description %}
+                        <div>
+                            <h5>Description:</h5>
+                            <p>{{haka.description}}</p>
+                        </div>
+                    {% endif %}
+
+                    {% if haka.lyrics %}
+                        <div>
+                            <h5>Lyrics:</h5>
+                            <p>{{haka.lyrics|linebreaksbr}}</p>
+                        </div>
+                    {% endif %}
+
+                    {% if haka.file %}
+                        <div><a href="{{ haka.file.url }}" target="_blank">{{haka.file.name}}</a></div>
+                    {% endif %}
+
+                    {% if haka.video_id %}
+                            <div><h5>{{haka.video_title}}</div></h5>
+        
+                            {% if haka.video_service == "youtube" %}
+                            <iframe
+                                    width="640"
+                                    height="385"
+                                    src="https://www.youtube-nocookie.com/embed/{{ haka.video_id }}?rel=0&amp;controls=0&amp;showinfo=0"
+                                    allow="autoplay; encrypted-media"
+                                    allowfullscreen>
+                            </iframe>
+                        {% else %}
+                            <iframe
+                                    width="640"
+                                    height="385"
+                                    src="https://player.vimeo.com/video/{{ haka.video_id }}"
                                     allow="autoplay; encrypted-media"
                                     allowfullscreen>
                             </iframe>
