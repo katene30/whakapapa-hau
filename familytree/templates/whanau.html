@@ -11,4 +11,53 @@
         </ul>
     {% endif %}
 
+    {% if whanau.waiata.all %}
+    <h3>Whanau Waiata:</h3>
+        <ul>
+            {% for waiata in whanau.waiata.all %}
+                <li>
+                    <div>
+                        <h4>{{waiata.name}}</h4>
+                    </div>
+                    {% if waiata.description %}
+                        <div>{{waiata.description}}</div>
+                    {% endif %}
+
+                    {% if waiata.lyrics %}
+                        <div>
+                            <h5>Lyrics:</h5>
+                            <p>{{waiata.lyrics|linebreaksbr}}</p>
+                        </div>
+                    {% endif %}
+
+                    {% if waiata.file %}
+                        <div><a href="{{ waiata.file.url }}" target="_blank">{{waiata.file.name}}</a></div>
+                    {% endif %}
+                    
+                    {% if waiata.video_id %}
+                            <div><h5>{{waiata.video_title}}</div></h5>
+        
+                            {% if waiata.video_service == "youtube" %}
+                            <iframe
+                                    width="640"
+                                    height="385"
+                                    src="https://www.youtube-nocookie.com/embed/{{ waiata.video_id }}?rel=0&amp;controls=0&amp;showinfo=0"
+                                    allow="autoplay; encrypted-media"
+                                    allowfullscreen>
+                            </iframe>
+                        {% else %}
+                            <iframe
+                                    width="640"
+                                    height="385"
+                                    src="https://player.vimeo.com/video/{{ waiata.video_id }}"
+                                    allow="autoplay; encrypted-media"
+                                    allowfullscreen>
+                            </iframe>
+                        {% endif %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
 {% endblock %}

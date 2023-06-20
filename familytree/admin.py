@@ -4,7 +4,7 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 from django.db.models import Q
 
-from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau
+from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau, WhanauWaiata
 
 class PersonForm(forms.ModelForm):
 
@@ -92,7 +92,18 @@ class PersonAdmin(admin.ModelAdmin):
             ((whanau.name,) for whanau in instance.whanau.all()),
         )
 
+class WhanauWaiataInline(admin.StackedInline):
+    model = WhanauWaiata
+
+    exclude = ['video_id', 'video_service']
+    extra = 0
+    classes = ['collapse']
+
+class WhanauAdmin(admin.ModelAdmin):
+    inlines = [
+        WhanauWaiataInline,
+    ]
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Relationship)
-admin.site.register(Whanau)
+admin.site.register(Whanau, WhanauAdmin)
