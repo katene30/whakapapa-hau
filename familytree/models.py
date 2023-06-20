@@ -284,3 +284,11 @@ class Whanau(models.Model):
 
     class Meta:
         verbose_name_plural = "Whanau"
+
+class WhanauWaiata(models.Model):
+    whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='waiata')
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500, null=True, blank=True)
+    lyrics = models.TextField(max_length=2000, null=True, blank=True)
+    file = models.FileField(null=True, blank=True)
+    
