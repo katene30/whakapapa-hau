@@ -83,7 +83,7 @@
             {% if person.video.all %}
                 <h3>Videos</h3>
                 {% for video_object in person.video.all%}
-                    <li>{{video_object.title}}</li>
+                    <li>{{video_object.video_title}}</li>
 
                     {% if video_object.video_service == "youtube" %}
                     <iframe
