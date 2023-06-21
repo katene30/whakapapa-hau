@@ -278,6 +278,8 @@ class WhanauHaka(VideoMixin, models.Model):
         abstract = False
         verbose_name_plural = "Haka"
 
+# Under review if it's important enough to keep. Whether we want it now or later
+# Needs evaluating the value of this feature 
 class WhanauStory(models.Model):
     whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='whanau_stories')
     title = models.CharField(max_length=100)

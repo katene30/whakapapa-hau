@@ -126,6 +126,8 @@ class WhanauHakaInline(admin.StackedInline):
     extra = 0
     classes = ['collapse']
 
+# Under review if it's important enough to keep. Whether we want it now or later
+# Needs evaluating the value of this feature 
 class WhanauStoryImageInline(admin.TabularInline):
     model = WhanauStoryImage
 
