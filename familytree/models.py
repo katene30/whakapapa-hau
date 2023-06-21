@@ -209,6 +209,17 @@ class WhanauIwi(models.Model):
         verbose_name = "Iwi"
         verbose_name_plural = "Iwi"
 
+class WhanauHapu(models.Model):
+    whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='hapu')
+    hapu = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.hapu
+    
+    class Meta:
+        verbose_name = "Hapu"
+        verbose_name_plural = "Hapu"
+
 class WhanauImage(models.Model):
     whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='images')
     title = models.CharField(max_length=100)

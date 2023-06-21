@@ -15,10 +15,19 @@
     {% endif %}
 
     {% if whanau.iwi.all %}
-        <h3>Iwi</h3>
+        <h3>Iwi: </h3>
         <ul>
             {%for iwi_object in whanau.iwi.all%}
                 <li>{{ iwi_object.iwi }}</li>
+            {%endfor%}
+        </ul>
+    {% endif %}
+
+    {% if whanau.hapu.all %}
+        <h3>Hapu: </h3>
+        <ul>
+            {%for hapu_object in whanau.hapu.all%}
+                <li>{{ hapu_object.hapu }}</li>
             {%endfor%}
         </ul>
     {% endif %}
