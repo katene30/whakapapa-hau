@@ -32,6 +32,34 @@
         </ul>
     {% endif %}
 
+    {% if whanau.marae %}
+        <h3>Marae:</h3>
+        <div>
+            <b>{{ whanau.marae.name }}</b>
+        </div>
+        <div>
+            <p>{{ whanau.marae.physical_address }}</p>
+        </div>
+        {% if whanau.marae.phone_number or whanau.marae.email %}
+            <div class="contact-information">
+                {% if whanau.marae.phone_number %}
+                    <p><b>Phone:</b> {{ whanau.marae.phone_number }}</p>
+                {% endif %}
+                {% if whanau.marae.email %}
+                    <p><b>Email:</b> {{ whanau.marae.email }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if whanau.marae.image %}
+            {% with marae_image=whanau.marae.image%}
+                <img src="{{marae_image.url}}" alt="{{marae_image.alt_text}}" style="height:315px;">
+            {% endwith %}
+        {% endif %}
+        
+    {% endif %}
+
+
     {% if whanau.images.all %}
         <h3>Whanau Images:</h3>
         <ul>

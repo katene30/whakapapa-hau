@@ -4,7 +4,7 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 from django.db.models import Q
 
-from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau, WhanauDocument, WhanauHapu, WhanauIwi, WhanauStory, WhanauVideo, WhanauWaiata, WhanauHaka, WhanauImage, WhanauStoryImage
+from .models import Marae, Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau, WhanauDocument, WhanauHapu, WhanauIwi, WhanauStory, WhanauVideo, WhanauWaiata, WhanauHaka, WhanauImage, WhanauStoryImage
 
 class PersonForm(forms.ModelForm):
 
@@ -160,3 +160,4 @@ class WhanauAdmin(admin.ModelAdmin):
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Relationship)
 admin.site.register(Whanau, WhanauAdmin)
+admin.site.register(Marae)

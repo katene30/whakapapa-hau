@@ -185,9 +185,26 @@ class PersonHapu(models.Model):
         verbose_name = "Hapu"
         verbose_name_plural = "Hapu"
 
+class Marae(models.Model):
+    name = models.CharField(max_length=200)
+    physical_address = models.CharField(max_length=255)
+    image = models.ImageField(null=True, blank=True)
+
+    # Contact information
+    phone_number = models.CharField(max_length=20, null=False, blank=True, default="")
+    email = models.EmailField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Marae"
+
 class Whanau(models.Model):
     name = models.CharField(max_length=100, unique=True)
     members = models.ManyToManyField(Person, related_name='whanau')
+    marae = models.ForeignKey(Marae, on_delete=models.CASCADE, blank=True, null=True)
+
 
     def get_url(self):
         return reverse('whanau-by-id', kwargs={'id': self.id})
@@ -277,6 +294,9 @@ class WhanauHaka(VideoMixin, models.Model):
     class Meta:
         abstract = False
         verbose_name_plural = "Haka"
+
+
+
 
 # Under review if it's important enough to keep. Whether we want it now or later
 # Needs evaluating the value of this feature 
