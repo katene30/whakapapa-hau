@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% block title %}{{ person.first_name }} {{ person.last_name }} Profile{% endblock %}
+
 {% block content %}
 
   <h1>Family Tree Builder</h1>
@@ -108,7 +111,7 @@
 
                 {%endfor%}
             {% endif %}
-            
+
             {% if person.documentation.all%}
                 <h3>Documents</h3>
                 {% for document_object in person.documentation.all %}
