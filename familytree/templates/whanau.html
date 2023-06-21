@@ -221,4 +221,50 @@
         </ul>
     {% endif %}
 
+    {% if whanau.whanau_stories.all %}
+        <h3>Whanau Stories:</h3>
+        <ul>
+            {% for whanau_story in whanau.whanau_stories.all %}
+                <li>
+                    <div>
+                        <h4>{{whanau_story.title}}</h4>
+                    </div>
+
+                    <div>
+                        <h5>Narrative:</h5>
+                        <p>{{whanau_story.narrative|linebreaksbr}}</p>
+                    </div>
+
+                    {% if whanau_story.whanau_story_images.all %}
+                        <h5>Images:</h5>
+                        <ul>
+                            {% for whanau_story_image in whanau_story.whanau_story_images.all %}
+                                <li>
+                                    <div>
+                                        <b>{{whanau_story_image.title}}</b>
+                                    </div>
+                
+                                    <img src="{{whanau_story_image.image.url}}" alt="{{whanau_story_image.alt_text}}" style="height:315px;">
+                
+                                    {% if whanau_story_image.description %}
+                                        <div>
+                                            <b>Description:</b>
+                                            <p>{{whanau_story_image.description}}</p>
+                                        </div>
+                                    {% endif %}
+                
+                                        <div>
+                                            <p>Uploaded at: {{whanau_story_image.upload_date}}</p>
+                                        </div>
+                                </li>
+                            {% endfor %}
+                    {% endif %}
+
+
+                    
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
 {% endblock %}

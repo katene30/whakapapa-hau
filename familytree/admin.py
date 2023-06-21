@@ -4,7 +4,7 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 from django.db.models import Q
 
-from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau, WhanauDocument, WhanauHapu, WhanauIwi, WhanauVideo, WhanauWaiata, WhanauHaka, WhanauImage
+from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau, WhanauDocument, WhanauHapu, WhanauIwi, WhanauStory, WhanauVideo, WhanauWaiata, WhanauHaka, WhanauImage, WhanauStoryImage
 
 class PersonForm(forms.ModelForm):
 
@@ -126,7 +126,22 @@ class WhanauHakaInline(admin.StackedInline):
     extra = 0
     classes = ['collapse']
 
+class WhanauStoryImageInline(admin.TabularInline):
+    model = WhanauStoryImage
 
+class WhanauStoryAdmin(admin.ModelAdmin):
+    inlines = [
+        WhanauStoryImageInline,
+    ]
+
+admin.site.register(WhanauStory, WhanauStoryAdmin)
+
+# Whanau has WhanauStory inline but rather
+# than nesting inlines (not possible), shows a link to
+# its own ModelAdmin's change form, for accessing WhanauStoryImage:
+class WhanauStoryLinkInline(admin.StackedInline):
+    model = WhanauStory
+    show_change_link = True
 
 class WhanauAdmin(admin.ModelAdmin):
     inlines = [
@@ -135,6 +150,7 @@ class WhanauAdmin(admin.ModelAdmin):
         WhanauImageInline,
         WhanauVideoInline,
         WhanauDocumentInline,
+        WhanauStoryLinkInline,
         WhanauWaiataInline,
         WhanauHakaInline,
     ]

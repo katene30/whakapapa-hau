@@ -277,3 +277,25 @@ class WhanauHaka(VideoMixin, models.Model):
     class Meta:
         abstract = False
         verbose_name_plural = "Haka"
+
+class WhanauStory(models.Model):
+    whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='whanau_stories')
+    title = models.CharField(max_length=100)
+    narrative = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "Whanau Stories"
+
+class WhanauStoryImage(models.Model):
+    whanau_story = models.ForeignKey(WhanauStory, on_delete=models.CASCADE, related_name='whanau_story_images')
+    title = models.CharField(max_length=100)
+    image = models.ImageField()
+    description = models.CharField(max_length=200, null=True, blank=True)
+    alt_text = models.CharField(max_length=50, help_text='Provide alternative text for the image. Alt text is used by screen readers to describe the image for visually impaired users.')
+    upload_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
