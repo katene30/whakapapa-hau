@@ -4,7 +4,7 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 from django.db.models import Q
 
-from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau, WhanauHapu, WhanauIwi, WhanauVideo, WhanauWaiata, WhanauHaka, WhanauImage
+from .models import Person, Relationship, PersonMedia, PersonIwi, PersonHapu, PersonDocument, PersonVideo, Whanau, WhanauDocument, WhanauHapu, WhanauIwi, WhanauVideo, WhanauWaiata, WhanauHaka, WhanauImage
 
 class PersonForm(forms.ModelForm):
 
@@ -109,6 +109,9 @@ class WhanauVideoInline(admin.TabularInline):
     exclude = ['video_id', 'video_service']
     model = WhanauVideo
 
+class WhanauDocumentInline(admin.TabularInline):
+    model = WhanauDocument
+
 class WhanauWaiataInline(admin.StackedInline):
     model = WhanauWaiata
 
@@ -131,6 +134,7 @@ class WhanauAdmin(admin.ModelAdmin):
         WhanauHapuInline,
         WhanauImageInline,
         WhanauVideoInline,
+        WhanauDocumentInline,
         WhanauWaiataInline,
         WhanauHakaInline,
     ]

@@ -112,11 +112,12 @@
                 {%endfor%}
             {% endif %}
 
-            {% if person.documentation.all%}
+            {% if person.documents.all%}
                 <h3>Documents</h3>
-                {% for document_object in person.documentation.all %}
-                    <li><a href="{{ document_object.file.url }}" target="_blank">{{document_object.title}}</a></li>
+                {% for document in person.documents.all %}
+                    <li><a href="{{ document.file.url }}" target="_blank">{{document.title}}</a></li>
                 {% endfor %}
             {% endif %}
+            
         </ul>
 {% endblock %}

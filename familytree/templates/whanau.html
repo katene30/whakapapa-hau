@@ -90,6 +90,15 @@
         </ul>
     {% endif %}
 
+    {% if whanau.documents.all%}
+        <h3>Documents: </h3>
+        <ul>
+            {% for document in whanau.documents.all %}
+                <li><a href="{{ document.file.url }}" target="_blank">{{document.title}}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     {% if whanau.waiata.all %}
         <h3>Whanau Waiata:</h3>
         <ul>
@@ -182,6 +191,7 @@
                     {% endif %}
 
                     {% if haka.file %}
+                        <h5>Files:</h5>
                         <div><a href="{{ haka.file.url }}" target="_blank">{{haka.file.name}}</a></div>
                     {% endif %}
 
