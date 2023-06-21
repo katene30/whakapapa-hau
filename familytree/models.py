@@ -171,6 +171,7 @@ class PersonIwi(models.Model):
         return self.iwi
     
     class Meta:
+        verbose_name = "Iwi"
         verbose_name_plural = "Iwi"
 
 class PersonHapu(models.Model):
@@ -181,6 +182,7 @@ class PersonHapu(models.Model):
         return self.hapu
     
     class Meta:
+        verbose_name = "Hapu"
         verbose_name_plural = "Hapu"
 
 class Whanau(models.Model):
@@ -195,6 +197,17 @@ class Whanau(models.Model):
 
     class Meta:
         verbose_name_plural = "Whanau"
+
+class WhanauIwi(models.Model):
+    whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='iwi')
+    iwi = models.CharField(max_length=100, choices=IWI_CHOICES, null=True, blank=True)
+
+    def __str__(self):
+        return self.iwi
+    
+    class Meta:
+        verbose_name = "Iwi"
+        verbose_name_plural = "Iwi"
 
 class WhanauImage(models.Model):
     whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='images')

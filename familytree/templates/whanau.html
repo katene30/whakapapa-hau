@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% block title %}{{ whanau.name }} Whanau{% endblock %}
+
 {% block content %}
     <h1>{{ whanau.name }} Whanau</h1>
 
@@ -8,6 +11,15 @@
             {% for whanau_member in whanau.members.all %}
                 <li><a href="{{whanau_member.get_url}}">{{whanau_member.first_name}} {{whanau_member.last_name}}</a></li>
             {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if whanau.iwi.all %}
+        <h3>Iwi</h3>
+        <ul>
+            {%for iwi_object in whanau.iwi.all%}
+                <li>{{ iwi_object.iwi }}</li>
+            {%endfor%}
         </ul>
     {% endif %}
 
