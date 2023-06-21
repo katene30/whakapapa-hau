@@ -38,6 +38,37 @@
         </ul>
     {% endif %}
 
+    {% if whanau.videos.all %}
+        <h3>Whanau Videos:</h3>
+        <ul>
+            {% for video_object in whanau.videos.all%}
+                <li>
+                    <h4>{{video_object.video_title}}</h4>
+
+                    {% if video_object.video_service == "youtube" %}
+                        <iframe
+                                width="640"
+                                height="385"
+                                src="https://www.youtube-nocookie.com/embed/{{ video_object.video_id }}?rel=0&amp;controls=0&amp;showinfo=0"
+                                allow="autoplay; encrypted-media"
+                                allowfullscreen>
+                        </iframe>
+                    {% else %}
+                        <iframe
+                                width="640"
+                                height="385"
+                                src="https://player.vimeo.com/video/{{ video_object.video_id }}"
+                                allow="autoplay; encrypted-media"
+                                allowfullscreen>
+                        </iframe>
+                    {% endif %}
+
+                    <p>Uploaded at: {{video_object.upload_date}}</p>
+                </li>
+            {%endfor%}
+        </ul>
+    {% endif %}
+
     {% if whanau.waiata.all %}
         <h3>Whanau Waiata:</h3>
         <ul>
@@ -69,6 +100,7 @@
                     {% endif %}
 
                     {% if waiata.file %}
+                        <h5>Files:</h5>
                         <div><a href="{{ waiata.file.url }}" target="_blank">{{waiata.file.name}}</a></div>
                     {% endif %}
 

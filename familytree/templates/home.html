@@ -80,6 +80,7 @@
                     <img src="{{media_object.image.url}}" alt="{{media_object.alt_text}}" style="height:315px;">
                 {%endfor%}
             {% endif %}
+
             {% if person.videos.all %}
                 <h3>Videos</h3>
                 {% for video_object in person.videos.all%}
@@ -107,6 +108,7 @@
 
                 {%endfor%}
             {% endif %}
+            
             {% if person.documentation.all%}
                 <h3>Documents</h3>
                 {% for document_object in person.documentation.all %}
