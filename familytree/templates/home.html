@@ -80,9 +80,9 @@
                     <img src="{{media_object.image.url}}" alt="{{media_object.alt_text}}" style="height:315px;">
                 {%endfor%}
             {% endif %}
-            {% if person.video.all %}
+            {% if person.videos.all %}
                 <h3>Videos</h3>
-                {% for video_object in person.video.all%}
+                {% for video_object in person.videos.all%}
                     <li>{{video_object.video_title}}</li>
 
                     {% if video_object.video_service == "youtube" %}

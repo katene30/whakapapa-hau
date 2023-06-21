@@ -11,8 +11,35 @@
         </ul>
     {% endif %}
 
+    {% if whanau.images.all %}
+        <h3>Whanau Images:</h3>
+        <ul>
+            {% for whanau_image in whanau.images.all %}
+                <li>
+                    <div>
+                        <h4>{{whanau_image.title}}</h4>
+                    </div>
+
+                    <img src="{{whanau_image.image.url}}" alt="{{whanau_image.alt_text}}" style="height:315px;">
+
+                    {% if whanau_image.description %}
+                        <div>
+                            <h5>Description:</h5>
+                            <p>{{whanau_image.description}}</p>
+                        </div>
+                    {% endif %}
+
+                        <div>
+                            <p>Uploaded at: {{whanau_image.upload_date}}</p>
+                        </div>
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     {% if whanau.waiata.all %}
-    <h3>Whanau Waiata:</h3>
+        <h3>Whanau Waiata:</h3>
         <ul>
             {% for waiata in whanau.waiata.all %}
                 <li>

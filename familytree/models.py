@@ -143,7 +143,7 @@ class PersonMedia(models.Model):
         verbose_name_plural = "Media"
 
 class PersonVideo(VideoMixin, models.Model):
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='video')
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='videos')
     upload_date = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -195,6 +195,21 @@ class Whanau(models.Model):
 
     class Meta:
         verbose_name_plural = "Whanau"
+
+class WhanauImage(models.Model):
+    whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='images')
+    title = models.CharField(max_length=100)
+    image = models.ImageField()
+    description = models.CharField(max_length=200, null=True, blank=True)
+    alt_text = models.CharField(max_length=50, help_text='Provide alternative text for the image. Alt text is used by screen readers to describe the image for visually impaired users.')
+    upload_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Media"
+        verbose_name_plural = "Media"
 
 class WhanauWaiata(VideoMixin, models.Model):
     whanau = models.ForeignKey(Whanau, on_delete=models.CASCADE, related_name='waiata')
