@@ -321,3 +321,13 @@ class WhanauStoryImage(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class WhanauStoryVideo(VideoMixin, models.Model):
+    whanau_story = models.ForeignKey(WhanauStory, on_delete=models.CASCADE, related_name='videos')
+    description = models.CharField(max_length=500, null=True, blank=True)
+    
+    class Meta:
+        abstract = False
+        verbose_name = "Video"
+        verbose_name_plural = "Videos"
