@@ -331,3 +331,16 @@ class WhanauStoryVideo(VideoMixin, models.Model):
         abstract = False
         verbose_name = "Video"
         verbose_name_plural = "Videos"
+
+
+class WhanauStoryDocument(models.Model):
+    whanau_story = models.ForeignKey(WhanauStory, on_delete=models.CASCADE, related_name='documents')
+    file = models.FileField()
+    title = models.CharField(max_length=100)
+    upload_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Document"

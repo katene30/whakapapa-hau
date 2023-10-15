@@ -330,10 +330,21 @@ Needs evaluating the value of this feature {% endcomment %}
                         </ul>
                     {% endif %}
 
-                    {% comment %}  
-                    Voice recordings
-                    Documents
-                    {% endcomment %}
+                    {% if whanau_story.documents.all %}
+                    <h5>Documents:</h5>
+                    <ul>
+                        {% for document in whanau_story.documents.all %}
+                        <li>
+                            <b>{{ document.title }}</b>
+                            <a href="{{ document.file.url }}" target="_blank">{{document.title}}</a>
+                            Upload date: {{document.upload_date}}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    
+                    {# STRETCH Voice recordings #}
+
                 </li>
             {% endfor %}
         </ul>
